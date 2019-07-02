@@ -1,0 +1,133 @@
+.admin-pagination{
+  padding: 25px;
+  text-align: center;
+}
+.container-1200{
+  width: 1200px;
+  margin: 0 auto;
+  min-width: 1200px;
+}
+.box-shadow{
+  box-shadow: 1px 0 8px 6px rgba(0,0,0,.1);
+}
+.right-container{
+  margin-left: 190px;
+  position: relative;
+  .right-content{
+    margin-top: 30px;
+    background-color: #fff;
+    padding-left: 30px;
+    padding-top: 20px;
+    min-height: 565px;
+  }
+}
+.txt-one-cut{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.txt-two-cut{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  color: #999;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  max-height: 40px;
+}
+.scroll-bar{
+  &::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 4px;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 4px;
+  }
+  &::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.2);
+  }
+  &::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px #f9f9f9;
+    border-radius: 0;
+    background: rgba(0,0,0,0.1);
+  }
+}
+.font-count-item{
+  position: relative;
+  .font-count-tag{
+    position: absolute;
+    right: 7px;
+    bottom: 1px;
+    font-size: 12px;
+    line-height: 1;
+    span{
+      color: #1fa2ff;
+    }
+  }
+}
+.common-nav {
+  padding-bottom: 15px;
+  font-size: 18px;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  margin-bottom: 20px;
+}
+
+.fsh-f-222{
+  color: #222;
+}
+.fsh-f-gold{
+  color: #ffde00 !important;
+}
+input::-webkit-input-placeholder{
+  color:#ccc;
+}
+input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+  color:#ccc;
+}
+input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+  color:#ccc;
+}
+input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
+  color:#ccc;
+}
+
+.pagination{
+  text-align: center;
+  padding: 20px 0;
+}
+input:-internal-autofill-selected {
+  background-color: #fff;
+  background-image: none !important;
+  color: rgb(0, 0, 0) !important;
+}
+//.clearfix:after {
+//  content: ".";
+//  display: block;
+//  height: 0;
+//  clear: both;
+//  visibility: hidden
+//}
+
+//.clearfix {
+//  *+height: 1%;
+//}
+.clearfix:after {
+  content:"";
+  display:block;
+  height:0;
+  clear:both;
+}
+.clearfix {*zoom:1;}/*IE/7/6*/
+.error-txt{
+  position: absolute;
+  left: 0;
+  bottom: -17px;
+  color: #ff0000;
+  font-size: 12px;
+}
+.iconfont-icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}

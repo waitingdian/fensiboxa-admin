@@ -1,0 +1,27 @@
+{
+  "name": "fensi-admin",
+  "version": "1.0.0",
+  "description": "My extraordinary Nuxt.js project",
+  "author": "yansai",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
+    "build": "nuxt build",
+    "start": "cross-env NODE_ENV=production node server/index.js",
+    "generate": "nuxt generate",
+    "prop": 3001
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.5.4",
+    "cross-env": "^5.2.0",
+    "element-ui": "^2.9.2",
+    "koa": "^2.6.2",
+    "less": "^3.9.0",
+    "less-loader": "^5.0.0",
+    "nuxt": "^2.0.0",
+    "save": "^2.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
