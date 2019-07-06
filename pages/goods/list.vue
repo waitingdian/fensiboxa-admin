@@ -2,18 +2,26 @@
   <div class="goods-page">
     <p class="common-nav">商品列表</p>
     <div>
-      <el-form :inline="true" :model="searchForm" class="search-form" label-width="80px">
+      <el-form :inline="true"
+               @submit.native.prevent
+               :model="searchForm"
+               class="search-form"
+               label-width="80px">
         <el-row style="height: 45px;">
           <el-col :span="10">
             <el-form-item label="商品名称">
-              <el-input v-model="searchForm.name" placeholder="请输入商品名称">
+              <el-input v-model="searchForm.name" placeholder="请输入商品名称" @keyup.enter.native="getList">
                 <el-button @click="getList" slot="append" icon="el-icon-search"></el-button>
               </el-input>
             </el-form-item>
           </el-col>
           <el-col :span="14">
             <el-form-item class="p-l-45">
-              <el-button type="primary" v-if="userInfo && userInfo.role==1" @click="syncProduct">同步商品</el-button>
+              <el-button type="primary"
+                         v-if="userInfo && userInfo.role==1"
+                         :disabled="loading"
+                         @click="syncProduct">同步商品
+              </el-button>
             </el-form-item>
           </el-col>
         </el-row>
@@ -77,7 +85,13 @@
       class="dialog-visible"
       @close="close"
       width="420px">
-      <el-form :model="form" :rules="rules" ref="form" label-width="100px" class="demo-form">
+      <el-form :model="form"
+               v-if="dialogVisible"
+               @submit.native.prevent
+               :rules="rules"
+               ref="form"
+               label-width="100px"
+               class="demo-form">
         <el-form-item label="商品编号" class="m-b-0">
           <template>{{ proInfo.id }}</template>
         </el-form-item>
@@ -110,6 +124,7 @@
         <p><span class="label">最大下单数:</span> {{ detailInfo.limitMax }}</p>
         <p><span class="label">下单倍数:</span> {{ detailInfo.rate }}</p>
         <p><span class="label">商品价格:</span> {{ detailInfo.price }}</p>
+        <p><span class="label">会员价格:</span> {{ detailInfo.memberPrice }}</p>
         <p><span class="label" v-if="detailInfo.pDesc">商品描述:</span></p>
         <p style="padding: 10px 15px" v-html="detailInfo.pDesc"></p>
       </div>
@@ -144,7 +159,7 @@
         },
         rules: {
           discount: [
-            { required: true, message: '请输入', trigger: 'blur' }
+            { required: true, message: '请输入', trigger: 'change' }
           ],
         },
         detailInfo: {},
@@ -247,7 +262,8 @@
       syncProduct () {
         this.loading = true
         this.$axios.$get(`/product/sync`).then((res) => {
-          this.$messge.success("同步成功")
+          this.$message.success("同步成功")
+          this.loading = false
         }).catch(() => {
           this.loading = false
         })

@@ -1,13 +1,14 @@
 <template>
   <div class="login-page bg-white">
     <el-form :model="loginForm"
+             @submit.native.prevent
              status-icon
              :rules="rules"
              ref="loginForm"
              label-width="80px"
              v-loading="loading"
              class="login-form box-shadow">
-      <p class="f-tac f-fs24 text-black p-b-50">粉丝盒后台管理系统</p>
+      <p class="f-tac text-black f-fs24 p-b-50">粉丝盒后台管理系统</p>
       <el-form-item label="用户名" prop="username">
         <el-input v-model.number="loginForm.username"></el-input>
       </el-form-item>
@@ -94,7 +95,17 @@
     position: absolute;
     width: 100%;
     height: 100%;
+    background: url('../static/bg_img.jpg') no-repeat top left;
+    background-size: cover;
+    color: #fff;
+    .el-form-item__label{
+     /*color: #fff;*/
+    }
     .login-form{
+      position: relative;
+      z-index: 1;
+      background-color: #fff;
+      /*background-color: rgba(0,0,0,.5);*/
       width: 560px;
       padding: 35px;
       margin: 60px auto;

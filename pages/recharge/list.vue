@@ -2,7 +2,11 @@
   <div class="order-page">
     <p class="common-nav">充值列表</p>
     <div>
-      <el-form :inline="true" :model="searchForm" class="search-form" label-width="80px">
+      <el-form :inline="true"
+               @submit.native.prevent
+               :model="searchForm"
+               class="search-form"
+               label-width="80px">
         <el-form-item label="开始时间">
           <el-date-picker
             v-model="searchForm.startTime"

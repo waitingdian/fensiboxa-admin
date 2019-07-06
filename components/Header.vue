@@ -20,7 +20,12 @@
       v-loading="loading"
       @close="close"
       width="520px;">
-      <el-form :model="form" :rules="rules" ref="form" label-width="100px" class="demo-form">
+      <el-form v-if="dialogVisible"
+               :model="form"
+               :rules="rules"
+               ref="form"
+               label-width="100px"
+               class="demo-form">
         <el-form-item label="用户名" prop="name">
           <template>{{ userInfo.username }}</template>
         </el-form-item>
@@ -103,6 +108,7 @@
     },
     methods: {
       close () {
+        this.form.oldPass = ''
         this.form.pass = ''
         this.form.checkPass = ''
       },

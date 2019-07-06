@@ -37,20 +37,25 @@
       </el-pagination>
     </div>
     <el-dialog
-      title="提示"
+      title="新增公告"
       :visible.sync="dialogVisible"
       v-loading="loading"
       @close="close"
-      width="520px">
-      <el-form :model="noticeForm" :rules="rules" ref="noticeForm" label-width="100px" class="demo-noticeForm">
+      width="540px">
+      <el-form :model="noticeForm"
+               @submit.native.prevent
+               :rules="rules"
+               ref="noticeForm"
+               label-width="100px"
+               class="demo-noticeForm p-l-20">
         <el-form-item label="公告标题" prop="title">
-          <template v-if="type ==1">{{ detailInfo.title }}</template>
+          <template v-if="type ==1">{{ noticeForm.title }}</template>
           <el-input v-else v-model="noticeForm.title"
                     maxlength="100"
                     show-word-limit></el-input>
         </el-form-item>
         <el-form-item label="公告内容" prop="content">
-          <div v-if="type==1">{{ detailInfo.content }}</div>
+          <div v-if="type==1">{{ noticeForm.content }}</div>
           <el-input v-else type="textarea"
                     v-model="noticeForm.content"
                     maxlength="200"
@@ -100,7 +105,7 @@
       close () {
         this.type = 0
         this.noticeId = ""
-        this.detailInfo = ""
+        this.noticeForm = {}
       },
       addNotice () {
         this.dialogVisible = true
@@ -121,11 +126,13 @@
         });
       },
       getDetailInfo (id, type) {
+        this.loading = true
         this.$axios.$get(`/announcement/detail/${id}`).then((res) => {
           this.loading = false
           this.type = type
           this.dialogVisible = true
-          this.detailInfo = res
+          this.noticeForm.title = res.title
+          this.noticeForm.content = res.content
         }).catch(() => {
           this.loading = false
         })

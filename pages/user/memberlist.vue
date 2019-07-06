@@ -1,7 +1,11 @@
 <template>
   <div class="member-page">
     <p class="common-nav">会员列表</p>
-    <el-form v-if="userInfo && userInfo.role == 3" :inline="true" :model="searchForm" class="search-form" label-width="80px">
+    <el-form v-if="userInfo && userInfo.role == 3"
+             @submit.native.prevent :inline="true"
+             :model="searchForm"
+             class="search-form"
+             label-width="80px">
       <el-row style="height: 45px;">
         <el-col :span="8">
           <el-form-item label="邀请码">
@@ -82,7 +86,11 @@
       v-loading="editLoading"
       class="dialog-visible"
       width="420px">
-      <el-form :model="form" :rules="rules" ref="form" label-width="100px">
+      <el-form :model="form"
+               @submit.native.prevent
+               :rules="rules"
+               ref="form"
+               label-width="100px">
         <el-form-item label="用户名称" class="m-b-0">
           <template>{{ originForm.username }}</template>
         </el-form-item>

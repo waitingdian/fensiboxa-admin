@@ -8,14 +8,18 @@
         v-loading="loading"
         style="width: 100%;min-heigh: 390px">
         <el-table-column
+          type="index"
+          width="50">
+        </el-table-column>
+        <el-table-column
           prop="username"
           show-overflow-tooltip
           label="用户名"
-          width="180">
+          width="170">
         </el-table-column>
         <el-table-column
           label="用户角色"
-          width="120">
+          width="110">
           <template slot-scope="scope">
             <span v-for="item in typeList" v-if="item.value === scope.row.role">{{ item && item.name }}</span>
           </template>
@@ -23,7 +27,7 @@
         <el-table-column
           prop="last_day_count"
           label="昨天拉新人数"
-          width="130">
+          width="120">
         </el-table-column>
         <el-table-column
           prop="month_count"

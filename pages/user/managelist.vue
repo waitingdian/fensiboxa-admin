@@ -52,8 +52,14 @@
     <el-dialog
       :title="userInfo.role == 1 ? '新增管理员' : '新增商务'"
       :visible.sync="dialogVisible"
+      @close="close"
       width="520px">
-      <el-form :model="form" :rules="rules" ref="form" label-width="100px" class="demo-form">
+      <el-form :model="form"
+               @submit.native.prevent
+               :rules="rules"
+               ref="form"
+               label-width="100px"
+               class="demo-form">
         <el-form-item :label="userInfo.role == 1 ? '管理员名称': '商务名称'" prop="name">
           <el-input v-model="form.name"></el-input>
         </el-form-item>
@@ -75,6 +81,7 @@
       v-loading="editLoading"
       width="520px">
       <el-form :model="userForm"
+               @submit.native.prevent
                :rules="userRules"
                ref="userForm"
                label-width="100px">
@@ -148,6 +155,7 @@
         this.$axios.$get(`/user/detail/${item.id}`).then((res) => {
           this.loading = false
           this.userForm = res
+          this.userForm.enabled = res.enabled == 1 ? true : false
           this.editDialogVisible = true
         }).catch(() => {
           this.loading = false
@@ -176,13 +184,23 @@
           }
         });
       },
+      resetForm () {
+        this.userForm.username = ''
+        this.userForm.inviteCode = null
+        this.userForm.enabled = true
+      },
       editUserAjax (id) {
         this.editLoading = true
-        this.$axios.$put(`/user/update/${this.userForm.id}`, {
-          username: this.userForm.username,
-          inviteCode: this.userForm.inviteCode || null,
-          enabled: this.userForm.enabled ? 1 : 0
-        }).then((res) => {
+        let params = {
+          username: this.userForm.username
+        }
+        if (this.userInfo && this.userInfo.role ==3) {
+          params.inviteCode = this.userForm.inviteCode
+        }
+        if (this.userInfo && this.userInfo.role ==1) {
+          params.enabled = this.userForm.enabled ? 1 : 0
+        }
+        this.$axios.$put(`/user/update/${this.userForm.id}`, params).then((res) => {
           this.editLoading = false
           this.editDialogVisible = false
           this.$message.success("编辑成功")
@@ -217,6 +235,9 @@
         }).catch(() => {
           this.loading = false
         })
+      },
+      close () {
+        this.form.name = ''
       }
     },
     mounted () {
